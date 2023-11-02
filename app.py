@@ -1,40 +1,22 @@
-import kivy
-from kivy.app import App 
-from kivy.uix.label import Label
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.button import Button
+import tkinter as tk
 
-class MyGridLayout(GridLayout):
+root = tk.Tk()
 
-    def __init__(self, **kwargs):
-        super(MyGridLayout, self).__init__(**kwargs)
 
-        # set columns
-        self.cols = 2
-        
-        # Add Widgets
-        self.add_widget(Label(text='Url: '))
-        
-        ## Add input
-        self.name=TextInput(multiline=False)
-        self.add_widget(self.name)
+def download():
+    print('Downloading url: {}'.format(url.get()))
 
-        # Add submit button
-        self.submit = Button(text='Download', font_size='32')
-        self.submit.bind(on_press=self.press)
-        self.add_widget(self.submit)
-
-    def press(self, instance):
-        url = self.name.text 
-        print("Clicked to download url {}".format(url))
+title_label = tk.Label(root, text = "Vidaun")
+input_url_label = tk.Label(root, text = "Insert Url")
+url = tk.Entry(root)
+download_button = tk.Button(root, text='Download',command=download, bg='white')
 
 
 
-class MyApp(App):
-    def build(self):
-        return MyGridLayout()
-    
+title_label.pack()
+input_url_label.pack()
+url.pack()
+download_button.pack()
 
-if __name__ == '__main__':
-    MyApp().run()
+
+root.mainloop()
