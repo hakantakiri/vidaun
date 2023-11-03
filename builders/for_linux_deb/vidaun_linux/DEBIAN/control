@@ -1,0 +1,5 @@
+Package: vidaun
+Version: 0.1
+Maintainer: Hakan
+Architecture: amd64
+Description: Universal video downloader for experimental purposes

@@ -6,15 +6,9 @@ from pathvalidate import sanitize_filename
 def run() :
 
     state_no_process = ''
-    state_loading = 'Loading'
-    state_finisçhed = 'Finished'
-    final_name = ''
 
-    root = tk.Tk()
+    root = tk.Tk(className='Vidaun')
     root.title('Vidaun')
-
-
-
 
     def getFolder():
     
@@ -22,8 +16,6 @@ def run() :
         print('selected folder is:')
         print(folder_selected)
         return folder_selected
-
-
 
     def click_download():
         url.config(state = 'disabled')
@@ -58,8 +50,6 @@ def run() :
         name.insert(0, folder_name+'/'+title.replace(' ', '_')+'.mp4')
 
         save_button.config(state='normal')
-
-
 
     def save():
 

@@ -1,0 +1,9 @@
+[Desktop Entry]
+
+Type=Application
+Name=vidaun
+Comment=Universal video downloader for personal use
+Path=/usr/local/bin/
+Exec=/usr/local/bin/vidaun
+Icon=/usr/share/icons/vidaun_icon.png
+Terminal=false
