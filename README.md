@@ -11,5 +11,5 @@ python3 app.py
 ## Building
 
 ```
-    pyinstaller vidaun.spec
+pyinstaller vidaun.spec
 ```
