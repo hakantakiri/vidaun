@@ -64,17 +64,17 @@ def get_info_without_download(url: str):
     raw_formats = info['formats'] if 'formats' in info else info['entries']
     for raw_format in raw_formats:
         formats.append({
-            'format_id':  raw_format['format_id'] if hasattr(raw_format, 'format_id') else None,
-            'resolution': raw_format['resolution'] if hasattr(raw_format, 'resolution') else None,
-            'ext': raw_format['ext'] if hasattr(raw_format,'ext') else None,
-            'fps': raw_format['ext'] if hasattr(raw_format,'fps') else None,
-            'format':  raw_format['format'] if hasattr(raw_format, 'format')   else None,
-            'dynamic_range': raw_format['dynamic_range'] if hasattr(raw_format, 'dynamic_range') else None,
+            'format_id':  raw_format['format_id'] if 'format_id' in raw_format else None,
+            'resolution': raw_format['resolution'] if 'resolution' in raw_format else None,
+            'ext': raw_format['ext'] if 'ext' in raw_format else None,
+            'fps': raw_format['fps'] if 'fps' in raw_format else None,
+            'format':  raw_format['format'] if 'format' in raw_format   else None,
+            'dynamic_range': raw_format['dynamic_range'] if 'dynamic_range' in raw_format else None,
         })
     
     # Formatting response
     response['title'] = sanitize_filename(info['title']).replace(' ', '_')
     response['formats'] = formats
-    response['preview_image'] = info['thumbnails'][0]['url'] if hasattr(info, 'thumbnails') else info['entries'][0]['thumbnails'][0]['url']
+    response['preview_image'] = info['thumbnails'][0]['url'] if 'thumbnails' in info else info['entries'][0]['thumbnails'][0]['url']
 
     return response
