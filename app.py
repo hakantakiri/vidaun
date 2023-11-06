@@ -1,7 +1,6 @@
-import downloadService as DS
+import app.services.downloadService as DS
 import tkinter as tk
 from tkinter import filedialog
-from pathvalidate import sanitize_filename
 
 def run() :
 
@@ -22,32 +21,16 @@ def run() :
         print('Downloading url: {}'.format(url.get()))
 
         folder_name = getFolder()
+
         info = DS.get_info_without_download(url.get())
-        
-        title = sanitize_filename(info['title'])
-        preview_url = info['thumbnails'][0]['url']
-        
-        formats = []
-        for f in info['formats']:
-            formats.append({
-                'format': f['format_id'], 
-                'resolution': f['resolution'],
-                'ext':f['ext']
-                })
-
-        print('info:')
-        print(info['formats'])
-        # print(info['title'])
-        # print(formats)
-        print('preview url: ', preview_url)
-
-
-
+        print('info')
+        print(info)
+        out_name = folder_name+'/'+(info['title']).replace(' ', '_')+'.mp4'
         url.config(state='disabled')
         download_button.config(state='disabled')
         name.config(state='normal')
 
-        name.insert(0, folder_name+'/'+title.replace(' ', '_')+'.mp4')
+        name.insert(0, out_name)
 
         save_button.config(state='normal')
 
