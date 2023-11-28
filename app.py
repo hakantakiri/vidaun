@@ -44,6 +44,7 @@ def run() :
             change_url_button.config(state='disabled')
             name.config(state='normal')
             name.delete(0, 'end')
+            name.focus_set()
             save_button.config(state='disabled')
         
         elif( step == STEP_ENUM.FOLDER_SELECTED):
@@ -51,6 +52,7 @@ def run() :
             download_button.config(state='disabled')
             change_url_button.config(state='normal')
             name.config(state='normal')
+            name.focus_set()
             save_button.config(state='normal')
         
         elif( step == STEP_ENUM.DOWNLOADING):
@@ -120,15 +122,21 @@ def run() :
         interface_set_step(STEP_ENUM.DOWNLOADED)
         interface_set_step(STEP_ENUM.INSERT_URL)
 
+    def test(event):
+        print('Return was pressed.')
+        Thread(target=click_download, args=[url.get()]).start()
+
     # Defining interface
     title_label = tk.Label(root, text = "Vidaun")
     input_url_label = tk.Label(root, text = "Insert Url")
     downloading_label = tk.Label(root, text= 'Downloading ...')
     url = tk.Entry(root, width=50)
     name = tk.Entry(root, width=35)
+    url.bind('<Return>', lambda event:Thread(target=click_download, args=[url.get()]).start())
     download_button = tk.Button(root, text='Download',command=lambda:Thread(target=click_download, args=[url.get()]).start(), bg='white')
     change_url_button = tk.Button(root, text="Change url", command= lambda: interface_set_step(STEP_ENUM.INSERT_URL))
-    save_button = tk.Button(root, text='Save', command=lambda:Thread(target=save, args=[url.get(), name.get()]).start(), bg='green')
+    name.bind('<Return>', lambda event:Thread(target=save, args=[url.get(), name.get()]).start())
+    save_button = tk.Button(root, text='Save', command=lambda:Thread(target=save, args=[url.get(), name.get()]).start(), bg='green')	
 
 
 
