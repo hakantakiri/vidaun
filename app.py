@@ -1,4 +1,5 @@
 import app.services.downloadService as DS
+import app.utils.utils as utils
 import tkinter as tk
 from tkinter import filedialog
 from enum import Enum
@@ -110,7 +111,7 @@ def run() :
         print(info)
 
         folder_name = interface_ask_folder()
-        out_name = folder_name+'/'+(info['title']).replace(' ', '_')+'.mp4'
+        out_name = folder_name+'/'+(utils.clean_name(info['title'])).replace(' ', '_')+'.mp4'
         name.insert(0, out_name)
         interface_set_step(STEP_ENUM.FOLDER_SELECTED)
 
@@ -121,10 +122,6 @@ def run() :
         thread.join()
         interface_set_step(STEP_ENUM.DOWNLOADED)
         interface_set_step(STEP_ENUM.INSERT_URL)
-
-    def test(event):
-        print('Return was pressed.')
-        Thread(target=click_download, args=[url.get()]).start()
 
     # Defining interface
     title_label = tk.Label(root, text = "Vidaun")
@@ -141,7 +138,6 @@ def run() :
 
 
     # Loading interface
-
     title_label.pack()
     input_url_label.pack()
     url.pack()
@@ -154,7 +150,6 @@ def run() :
     downloading_label.pack()
 
     interface_set_step(STEP_ENUM.INSERT_URL)
-
     root.mainloop()
 
 
